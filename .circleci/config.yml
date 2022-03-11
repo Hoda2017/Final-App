@@ -34,12 +34,6 @@ jobs:
              export url="http://localhost:8080"
              export response=$(curl -s $url)
              echo "This is response $response"
-             if [[ $response == *"NodeJS app"* ]]; then              
-              docker stop nodeapp
-             else              
-              docker stop nodeapp
-              exit 1
-             fi
              docker push hodayacoub/cluster-node:2.0
   
   Configurate-kubernetes-infrastructure:
