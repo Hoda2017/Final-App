@@ -48,6 +48,11 @@ jobs:
             yum install -y tar gzip
             curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
             mv /tmp/eksctl /usr/local/bin
+
+      - run:
+          name: test aws
+          command: |
+             aws ec2 describe-instances
       - run:
           name: install kubectl 
           command: |
@@ -60,10 +65,10 @@ jobs:
             if eksctl get cluster --name udaCapstone-cluster
             then
               echo "cluster already exists"
-              aws eks --region us-east-1 update-kubeconfig --name udaCapstone-cluster
+              aws eks --region us-east-2 update-kubeconfig --name udaCapstone-cluster
             else
               echo "creating a new cluster"
-              eksctl create cluster --name udaCapstone-cluster --region us-east-1  --zones us-east-1a,us-east-1b,us-east-1c --nodegroup-name linux-nodes --node-type t2.micro --nodes 2   
+              eksctl create cluster --name udaCapstone-cluster --region us-east-2  --zones us-east-2a,us-east-2b,us-east-21c --nodegroup-name linux-nodes --node-type t2.micro --nodes 2   
             fi
             kubectl get nodes
       - run:
