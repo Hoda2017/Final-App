@@ -60,15 +60,15 @@ jobs:
             chmod +x kubectl
             mv kubectl  /usr/local/bin             
       - run:
-          name: create kubernetes cluster
+          name: create kubernetes Capstone cluster
           command: |
-            if eksctl get cluster --name udaCapstone-cluster
+            if eksctl get cluster --name Capstone-cluster
             then
               echo "cluster already exists"
-              aws eks --region us-east-2 update-kubeconfig --name udaCapstone-cluster
+              aws eks --region us-east-2 update-kubeconfig --name Capstone-cluster
             else
               echo "creating a new cluster"
-              eksctl create cluster --name udaCapstone-cluster --region us-east-2  --zones us-east-2a,us-east-2b,us-east-21c --nodegroup-name linux-nodes --node-type t2.micro --nodes 2   
+              eksctl create cluster --name Capstone-cluster --region us-east-2  --zones us-east-2a,us-east-2b,us-east-2c --nodegroup-name linux-nodes --node-type t2.micro --nodes 2   
             fi
             kubectl get nodes
       - run:
